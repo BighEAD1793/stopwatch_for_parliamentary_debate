@@ -11,6 +11,13 @@ def hello_world():
     f.close()
     return contents
 
+@get("/jquery.mobile-1.4.5.js")
+def open_main():
+    f = open('js/jquery.mobile-1.4.5.js')
+    contents = f.read()
+    f.close()
+    return contents
+
 @get("/main.js")
 def open_main():
     f = open('js/main.js')
