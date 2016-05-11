@@ -1,7 +1,7 @@
-// var sound_time = [60, 360, 420, 435];
-// var sound_count = [1, 1, 2, 3]
-var sound_time = [2];
-var sound_count = [2];
+var sound_time = [60, 360, 420, 435];
+var sound_count = [1, 1, 2, 3]
+// var sound_time = [2];
+// var sound_count = [2];
 
 var SupportedAudioContext;
 try {
@@ -28,8 +28,8 @@ function initAudioContext() {
 function initSound() {
     sound_time = [60, 360, 420, 435];
     sound_count = [1, 1, 2, 3];
-    sound_time = [2];
-    sound_count = [2];
+    // sound_time = [2];
+    // sound_count = [2];
     sound_label = document.getElementById('sound_list');
     sound_label.innerHTML = generateSoundListText();
 }
