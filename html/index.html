@@ -1,3 +1,34 @@
-<h1>
-it works.
-</h1>
+<!DOCTYPE html> 
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <title>sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="sound.js"></script>
+    <script src="common.js"></script>
+    <script src="main.js"></script>
+
+  </head>
+  <body>
+    <div id="home" data-role="page" data-theme="b">
+      <div data-role="header">
+        <h1>Stop Watch</h1>
+      </div>
+      <center>
+          <p id="time">
+          00:00
+          </p>
+      </center>
+      <button class="ui-btn" id="start_button">Start</button>
+      <button class="ui-btn" id="reset_button">Reset</button>
+      <button class="ui-btn" id="bell_button">Bell</button>
+      <center>
+        <p id="sound_list">
+        </p>
+      </center>
+    </div>
+  </body>
+</html>
