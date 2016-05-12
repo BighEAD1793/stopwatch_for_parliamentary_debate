@@ -1,30 +1,37 @@
 $(function() {
-  $("#start_button").bind("tap", function() {
-    if (watch_start) {
-      this.innerHTML = 'Start';
-      watch_start = false;
+    $("#start_button").bind("tap", function() {
 
-      time_label = document.getElementById('time');
-      time_label.style.color = "blue"; 
-    } else {
-      this.innerHTML = 'Stop';
-      watch_start = true;
+        // load audio before time bell
+        if (!isAudioLoaded) {
+            ringSilently();
+            isAudioLoaded = true;
+        }
 
-      time_label = document.getElementById('time');
-      time_label.style.color = "white"; 
-    }
-  });
+        if (watch_start) {
+            this.innerHTML = 'Start';
+            watch_start = false;
 
-  $("#reset_button").on('tap', function() {
-    if (!watch_start) {
-      count = 0;
-      time_label = document.getElementById('time');
-      time_label.innerHTML = countToTime(0);
-      initSound();
-    }
-  });
+            time_label = document.getElementById('time');
+            time_label.style.color = "blue"; 
+        } else {
+            this.innerHTML = 'Stop';
+            watch_start = true;
 
-  $("#bell_button").on('tap', function() {
-    ring();
-  });
+            time_label = document.getElementById('time');
+            time_label.style.color = "white"; 
+        }
+    });
+
+    $("#reset_button").on('tap', function() {
+        if (!watch_start) {
+            count = 0;
+            time_label = document.getElementById('time');
+            time_label.innerHTML = countToTime(0);
+            initSound();
+        }
+    });
+
+    $("#bell_button").on('tap', function() {
+        ring();
+    });
 });

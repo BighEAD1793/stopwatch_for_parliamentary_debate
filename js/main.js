@@ -3,6 +3,7 @@ var run = true;
 
 var watch_start = false;
 var count = 0;
+var isAudioLoaded = false;
 
 window.onload = function(){
     initAudioContext();
@@ -43,21 +44,3 @@ function zeroPadding(num, figure) {
     return ("0" + num).slice(- figure);
 }
 
-function sound() {
-    if (count >= sound_time[0]) {
-        sound_time.shift();
-        c = sound_count[0];
-        sound_count.shift();
-        ringLoop(c, 0);
-
-        sound_label = document.getElementById('sound_list');
-        sound_label.innerHTML = generateSoundListText();
-    }
-}
-
-function ringLoop(count, i) {
-    if (i < count) {
-        ring();
-        setTimeout(function() {ringLoop(count, ++i)}, 300);
-    }
-}

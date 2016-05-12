@@ -1,7 +1,9 @@
-var sound_time = [60, 360, 420, 435];
-var sound_count = [1, 1, 2, 3]
-// var sound_time = [2];
-// var sound_count = [2];
+var init_sound_time = [60, 360, 420, 435];
+var init_sound_count = [1, 1, 2, 3]
+// var init_sound_time = [2];
+// var init_sound_count = [2];
+var sound_time;
+var sound_count;
 
 var SupportedAudioContext;
 try {
@@ -22,16 +24,24 @@ function initAudioContext() {
             audio_buffer = buf;
         });
     };
-    console.log('finished');
 }
 
 function initSound() {
-    sound_time = [60, 360, 420, 435];
-    sound_count = [1, 1, 2, 3];
-    // sound_time = [2];
-    // sound_count = [2];
+    sound_time = init_sound_time.slice();
+    sound_count = init_sound_count.slice();
     sound_label = document.getElementById('sound_list');
     sound_label.innerHTML = generateSoundListText();
+}
+
+function ringSilently() {
+    var source = context.createBufferSource();
+    var gainNode = context.createGain();
+    gainNode.gain.value = 0.0;
+    gainNode.connect(context.destination);
+    source.connect(gainNode);
+    // console.log(gainNode);
+    // console.log(source);
+    source.start(0);
 }
 
 function ring() {
@@ -39,4 +49,23 @@ function ring() {
     source.buffer = audio_buffer;
     source.connect(context.destination);
     source.start(0);
+}
+
+function sound() {
+    if (count >= sound_time[0]) {
+        sound_time.shift();
+        c = sound_count[0];
+        sound_count.shift();
+        ringLoop(c, 0);
+
+        sound_label = document.getElementById('sound_list');
+        sound_label.innerHTML = generateSoundListText();
+    }
+}
+
+function ringLoop(count, i) {
+    if (i < count) {
+        ring();
+        setTimeout(function() {ringLoop(count, ++i)}, 300);
+    }
 }
