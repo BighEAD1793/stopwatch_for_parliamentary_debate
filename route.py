@@ -41,7 +41,7 @@ def open_main():
 
 @get("/tablebell.mp3")
 def open_main():
-    f = open('media/TableBell.mp3')
+    f = open('media/TableBellLarge.mp3')
     contents = f.read()
     f.close()
     return contents

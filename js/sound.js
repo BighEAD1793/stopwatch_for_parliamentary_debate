@@ -38,9 +38,8 @@ function ringSilently() {
     var gainNode = context.createGain();
     gainNode.gain.value = 0.0;
     gainNode.connect(context.destination);
+    source.buffer = audio_buffer;
     source.connect(gainNode);
-    // console.log(gainNode);
-    // console.log(source);
     source.start(0);
 }
 
