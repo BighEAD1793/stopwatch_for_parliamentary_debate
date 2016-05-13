@@ -68,3 +68,6 @@ function ringLoop(count, i) {
         setTimeout(function() {ringLoop(count, ++i)}, 300);
     }
 }
+
+function switchRepConst() {
+}

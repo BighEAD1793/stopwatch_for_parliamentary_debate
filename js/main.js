@@ -3,7 +3,7 @@ var run = true;
 
 var watch_start = false;
 var count = 0;
-var isAudioLoaded = false;
+var audio_loaded = false;
 
 window.onload = function() {
     initAudioContext();

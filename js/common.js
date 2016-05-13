@@ -2,9 +2,9 @@ $(function() {
     $("#start_button").bind("tap", function() {
 
         // load audio before time bell
-        if (!isAudioLoaded) {
+        if (!audio_loaded) {
             ringSilently();
-            isAudioLoaded = true;
+            audio_loaded = true;
         }
 
         if (watch_start) {
