@@ -1,5 +1,5 @@
 var init_sound_time = [60, 360, 420, 435];
-var init_sound_count = [1, 1, 2, 3]
+var init_sound_count = [1, 1, 2, 3];
 // var init_sound_time = [2];
 // var init_sound_count = [2];
 var sound_time;
