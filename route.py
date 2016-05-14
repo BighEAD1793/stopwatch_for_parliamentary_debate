@@ -19,9 +19,16 @@ def callback(js):
     return contents
 
 
-@get("/<media:re:.+\.mp3$>")
-def callback(media):
-    f = open("media/" + media)
+# @get("/<media:re:.+\.mp3$>")
+# def callback(media):
+#     f = open("media/" + media)
+#     contents = f.read()
+#     f.close()
+#     return contents
+
+@get("/tablebell.mp3")
+def callback():
+    f = open("media/TableBellLarge.mp3")
     contents = f.read()
     f.close()
     return contents

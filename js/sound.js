@@ -16,7 +16,7 @@ var context = new SupportedAudioContext();
 var audio_buffer;
 function initAudioContext() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'tablebell.mp3', true);
+    request.open('GET', "tablebell.mp3", true);
     request.responseType = 'arraybuffer';
     request.send();
     request.onload = function () {
