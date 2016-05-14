@@ -8,7 +8,6 @@ var audio_loaded = false;
 window.onload = function() {
     initAudioContext();
     initSound();
-    console.log(audio_buffer);
 
     time_label = document.getElementById('time');
     time_label.style.color = 'blue';
