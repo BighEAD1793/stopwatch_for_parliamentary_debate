@@ -4,6 +4,7 @@ var init_sound_count = [1, 1, 2, 3];
 // var init_sound_count = [2];
 var sound_time;
 var sound_count;
+var reply = false;
 
 var SupportedAudioContext;
 try {
@@ -29,8 +30,7 @@ function initAudioContext() {
 function initSound() {
     sound_time = init_sound_time.slice();
     sound_count = init_sound_count.slice();
-    sound_label = document.getElementById('sound_list');
-    sound_label.innerHTML = generateSoundListText();
+    updateSoundLabel();
 }
 
 function ringSilently() {
@@ -57,8 +57,7 @@ function sound() {
         sound_count.shift();
         ringLoop(c, 0);
 
-        sound_label = document.getElementById('sound_list');
-        sound_label.innerHTML = generateSoundListText();
+        updateSoundLabel();
     }
 }
 
@@ -70,4 +69,21 @@ function ringLoop(count, i) {
 }
 
 function switchRepConst() {
+    reply = !reply;
+    if (reply) {
+        init_sound_time = [60, 360, 420, 435];
+        init_sound_count = [1, 1, 2, 3];
+    } else {
+        init_sound_time = [240];
+        init_sound_count = [2];
+    }
+
+    sound_time = init_sound_time.slice();
+    sound_count = init_sound_count.slice();
+
+    while (sound_time.length > 0 && sound_time[0] < count) {
+        sound_time.shift();
+        sound_count.shift();
+    }
+    updateSoundLabel();
 }
