@@ -34,4 +34,8 @@ $(function() {
     $("#bell_button").on('tap', function() {
         ring();
     });
+
+    $("#reply_button").on('tap', function() {
+        switchRepConst();
+    });
 });

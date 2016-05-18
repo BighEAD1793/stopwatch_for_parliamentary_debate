@@ -13,8 +13,7 @@ window.onload = function() {
     time_label.style.color = 'blue';
     time_label.style.fontSize= '500%';
 
-    sound_label = document.getElementById('sound_list');
-    sound_label.innerHTML = generateSoundListText();
+    updateSoundLabel();
 
     (function(){
         if (watch_start) {
@@ -26,6 +25,11 @@ window.onload = function() {
         if(run){setTimeout(arguments.callee, fps);}
     })();
 };
+
+function updateSoundLabel() {
+    sound_label = document.getElementById('sound_list');
+    sound_label.innerHTML = generateSoundListText();
+}
 
 function generateSoundListText() {
     var text = '';
