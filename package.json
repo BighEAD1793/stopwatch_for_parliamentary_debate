@@ -1,0 +1,23 @@
+{
+  "name": "stopwatch_for_parliamentary_debate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BighEAD1793/stopwatch_for_parliamentary_debate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BighEAD1793/stopwatch_for_parliamentary_debate/issues"
+  },
+  "homepage": "https://github.com/BighEAD1793/stopwatch_for_parliamentary_debate#readme",
+  "dependencies": {
+    "browser-sync": "^2.12.8",
+    "gulp": "^3.9.1"
+  }
+}
