@@ -31,11 +31,11 @@ Bell.prototype = {
     request.responseType = 'arraybuffer';
     request.send();
     var df = new $.Deferred();
-      request.onload = function () {
-        self.audioContext.decodeAudioData(request.response, function (buf) {
-          df.resolve(buf);
-        });
-      };
+    request.onload = function () {
+      self.audioContext.decodeAudioData(request.response, function (buf) {
+        df.resolve(buf);
+      });
+    };
     return df.promise();
   },
 
@@ -78,9 +78,15 @@ Timer.prototype = {
 
     self.bell = new Bell();
     self.isStarted = false;
-    self.framerate = 30;
+    self.framerate = 200;
     self.timePassed = 0;
     self.startTime = 0;
+    self.ringPeriod = [
+    {time: 10000, num: 2, done: false},
+    {time: 20000, num: 1, done: false},
+    {time: 42000, num: 2, done: false},
+    {time: 43000, num: 3, done: false},
+    ];
 
     self.bindEvent();
   },
@@ -116,6 +122,13 @@ Timer.prototype = {
     var loop = function(){
       var nowTime = new Date().getTime();
       self.timePassed = nowTime - self.startTime;
+      for(var i in self.ringPeriod){
+        var r = self.ringPeriod[i];
+        if(!r.done && r.time <= self.timePassed){
+          self.bell.ringMultiple(r.num);
+          r.done = true;
+        }
+      }
       self.refreshTimer();
       if(self.isStarted) setTimeout(loop, self.framerate);
     };
@@ -145,7 +158,7 @@ Timer.prototype = {
   }
 };
 
-
+var t;
 $(function(){
-  new Timer();
+  t = new Timer();
 });
