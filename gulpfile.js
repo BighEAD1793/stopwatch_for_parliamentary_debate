@@ -7,7 +7,10 @@ gulp.task("server", function() {
       baseDir: "./"
     }
   });
+  gulp.watch("**/**", function() {
+    browser.reload();   // ファイルに変更があれば同期しているブラウザをリロード
+  });
+
 });
-gulp.task("default",['server'],function() {
-  browser.reload({stream:true});
-});
+
+gulp.task("default",['server']);
