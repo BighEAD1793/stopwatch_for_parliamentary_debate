@@ -78,16 +78,24 @@ Timer.prototype = {
 
     self.bell = new Bell();
     self.isStarted = false;
-    self.framerate = 200;
+    self.framerate = 1;
     self.timePassed = 0;
     self.startTime = 0;
-    self.ringPeriod = [
-    {time: 10000, num: 2, done: false},
-    {time: 20000, num: 1, done: false},
-    {time: 42000, num: 2, done: false},
-    {time: 43000, num: 3, done: false},
-    ];
+    self.ringPeriod = {
+      "main":[
+      {time: 6, num: 1},
+      {time: 360, num: 1},
+      {time: 420, num: 2},
+      {time: 435, num: 3},
+      ],"reply":[
+      {time: 12, num: 1},
+      {time: 180, num: 1},
+      {time: 240, num: 2},
+      {time: 255, num: 3},
+      ]
+    }
 
+    self.mode = "main";
     self.bindEvent();
   },
 
@@ -97,7 +105,7 @@ Timer.prototype = {
       if(self.isStarted){
         self.timerStop();
       }else{
-        self.timerStart();
+        self.timerStart("main");
       }
     });
 
@@ -108,30 +116,42 @@ Timer.prototype = {
     self.$bellBtn.on("tap", function(){
       self.bell.ringMultiple(1);
     });
+
+    self.$replyBtn.on("tap", function(){
+      if(self.isStarted){
+        self.timerStop();
+      }else{
+        self.timerStart("reply");
+      }
+    });
   },
 
-  timerStart: function(){
+  timerStart: function(mode){
     var self = this;
+    // iphone hack
     if(!self.bell.isLoaded){
       self.bell.ring(0, true);
       self.bell.isLoaded = true;
     }
 
     self.isStarted = true;
+    self.mode = mode;
+    var ringPeriod = self.ringPeriod[self.mode];
     self.startTime = new Date().getTime() - self.timePassed;
+
     var loop = function(){
-      var nowTime = new Date().getTime();
-      self.timePassed = nowTime - self.startTime;
-      for(var i in self.ringPeriod){
-        var r = self.ringPeriod[i];
-        if(!r.done && r.time <= self.timePassed){
+      var nowTime = new Date().getTime() - self.startTime;
+      for(var i = 0; i < ringPeriod.length; i++){
+        var r = ringPeriod[i];
+        if(r.time * 1000 < nowTime && r.time * 1000 >= self.timePassed){
           self.bell.ringMultiple(r.num);
-          r.done = true;
         }
       }
+      self.timePassed = nowTime;
       self.refreshTimer();
       if(self.isStarted) setTimeout(loop, self.framerate);
     };
+
     loop();
   },
 
