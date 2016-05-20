@@ -83,12 +83,12 @@ Timer.prototype = {
     self.startTime = 0;
     self.ringPeriod = {
       "main":[
-      {time: 6, num: 1},
+      {time: 60, num: 1},
       {time: 360, num: 1},
       {time: 420, num: 2},
       {time: 435, num: 3},
       ],"reply":[
-      {time: 12, num: 1},
+      {time: 60, num: 1},
       {time: 180, num: 1},
       {time: 240, num: 2},
       {time: 255, num: 3},
@@ -103,8 +103,14 @@ Timer.prototype = {
     var self = this;
     self.$startBtn.on("tap", function(){
       if(self.isStarted){
+        self.$startBtn.text("Start");
+        self.$replyBtn.removeAttr("disabled");
+        self.$resetBtn.removeAttr("disabled");
         self.timerStop();
       }else{
+        self.$startBtn.text("Stop");
+        self.$replyBtn.attr("disabled","disabled");
+        self.$resetBtn.attr("disabled","disabled");
         self.timerStart("main");
       }
     });
@@ -119,8 +125,14 @@ Timer.prototype = {
 
     self.$replyBtn.on("tap", function(){
       if(self.isStarted){
+        self.$replyBtn.text("Reply Start");
+        self.$startBtn.removeAttr("disabled");
+        self.$resetBtn.removeAttr("disabled");
         self.timerStop();
       }else{
+        self.$replyBtn.text("Reply Stop");
+        self.$startBtn.attr("disabled","disabled");
+        self.$resetBtn.attr("disabled","disabled");
         self.timerStart("reply");
       }
     });
